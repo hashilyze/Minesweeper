@@ -86,14 +86,14 @@ namespace Minesweeper {
                 return false;
             }
 
-            bool[,] isVisit = new bool[m_size.x, m_size.y];
             Queue<Vector2Int> queue = new Queue<Vector2Int>();
             queue.Enqueue(offset);
 
             while (queue.Count > 0) {
                 Vector2Int openOffset = queue.Dequeue();
+                if (m_isOpens[openOffset.x, openOffset.y]) continue;
+
                 openOffsets.Add(openOffset);
-                isVisit[openOffset.x, openOffset.y] = true;
                 m_isOpens[openOffset.x, openOffset.y] = true;
 
                 // Stop to flood if tile is not null
@@ -105,7 +105,7 @@ namespace Minesweeper {
                     Vector2Int neighbourOffset = openOffset + NEIGHBOUR_OFFSETS[n];
 
                     if (0 <= neighbourOffset.x && neighbourOffset.x < m_size.x && 0 <= neighbourOffset.y && neighbourOffset.y < m_size.y) {
-                        if (isVisit[neighbourOffset.x, neighbourOffset.y] == false) {
+                        if (m_isOpens[neighbourOffset.x, neighbourOffset.y] == false) {
                             queue.Enqueue(neighbourOffset);
                         }
                     }

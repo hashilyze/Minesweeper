@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Minesweeper {
-    /// <summary>
-    /// Minesweeper Package Game Manager;
-    /// GameManager alive until exit the game
-    /// </summary>
-    public class MS_GameManager : MonoBehaviour {
-        private static MS_GameManager s_instance;
+    public class MS_GameManager : GameManager {
+        public MS_ModeSelectProcessor ModeSelectProcessor;
+        public MS_PlayProcessor PlayProcessor;
 
         private void Awake() {
-            if (s_instance is null) {
-                Initialize();
-            }
+            // Load Resources
+            MS_Resources.Load();
+            
+            // Load Processor
+            ModeSelectProcessor = FindObjectOfType<MS_ModeSelectProcessor>();
+            PlayProcessor = FindObjectOfType<MS_PlayProcessor>();
+
+            ModeSelectProcessor.gameObject.SetActive(false);
+            PlayProcessor.gameObject.SetActive(false);
         }
-        private void Initialize() {
-            s_instance = FindObjectOfType<MS_GameManager>();
-            if(s_instance is null) {
-                throw new System.NullReferenceException($"{nameof(MS_GameManager)} is null");
-            }
-            DontDestroyOnLoad(s_instance.gameObject);
+        private void Start() {
+            ModeSelectProcessor.Ative();
+            ModeSelectProcessor.OnSelected += (x) => PlayProcessor.Ative(x);
+            ModeSelectProcessor.OnSelected += (x) => ModeSelectProcessor.Deative();
         }
     }
 }
