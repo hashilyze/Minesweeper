@@ -8,7 +8,6 @@ namespace Minesweeper {
         public Button Right;
         public Button Left;
         public Button Select;
-
         public TMPro.TextMeshProUGUI Name;
     }
 }

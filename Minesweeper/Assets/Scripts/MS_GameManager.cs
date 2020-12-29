@@ -7,6 +7,7 @@ namespace Minesweeper {
         public MS_ModeSelectProcessor ModeSelectProcessor;
         public MS_PlayProcessor PlayProcessor;
 
+        // Boot game-manager
         private void Awake() {
             // Load Resources
             MS_Resources.Load();
@@ -15,13 +16,15 @@ namespace Minesweeper {
             ModeSelectProcessor = FindObjectOfType<MS_ModeSelectProcessor>();
             PlayProcessor = FindObjectOfType<MS_PlayProcessor>();
 
-            ModeSelectProcessor.gameObject.SetActive(false);
-            PlayProcessor.gameObject.SetActive(false);
+            ModeSelectProcessor.Deative();
+            PlayProcessor.Deative();
         }
         private void Start() {
             ModeSelectProcessor.Ative();
-            ModeSelectProcessor.OnSelected += (x) => PlayProcessor.Ative(x);
-            ModeSelectProcessor.OnSelected += (x) => ModeSelectProcessor.Deative();
+            ModeSelectProcessor.OnCommited += (mode) => PlayProcessor.Ative(mode);
+            ModeSelectProcessor.OnCommited += (mode) => ModeSelectProcessor.Deative();
+            PlayProcessor.OnRestart += (() => PlayProcessor.Deative());
+            PlayProcessor.OnRestart += (() => ModeSelectProcessor.Ative());
         }
     }
 }

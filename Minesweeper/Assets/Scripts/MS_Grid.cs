@@ -30,6 +30,7 @@ namespace Minesweeper {
             m_size = size;
             m_tileIDs = new int[m_size.x, m_size.y];
             m_isOpens = new bool[m_size.x, m_size.y];
+            m_mineOffsets = null;
 
             m_offsetGenerator = MakeOffsetGenerator(size);
         }
