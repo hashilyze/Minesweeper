@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Minesweeper.unity
+- path: Assets/Scenes/Classic Minesweeper.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

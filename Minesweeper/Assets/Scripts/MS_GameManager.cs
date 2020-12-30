@@ -4,27 +4,29 @@ using UnityEngine;
 
 namespace Minesweeper {
     public class MS_GameManager : GameManager {
-        public MS_ModeSelectProcessor ModeSelectProcessor;
+        public MS_SelectProcessor SelectProcessor;
         public MS_PlayProcessor PlayProcessor;
 
-        // Boot game-manager
+
         private void Awake() {
             // Load Resources
             MS_Resources.Load();
             
             // Load Processor
-            ModeSelectProcessor = FindObjectOfType<MS_ModeSelectProcessor>();
+            SelectProcessor = FindObjectOfType<MS_SelectProcessor>();
             PlayProcessor = FindObjectOfType<MS_PlayProcessor>();
 
-            ModeSelectProcessor.Deative();
+            SelectProcessor.Deative();
             PlayProcessor.Deative();
         }
         private void Start() {
-            ModeSelectProcessor.Ative();
-            ModeSelectProcessor.OnCommited += (mode) => PlayProcessor.Ative(mode);
-            ModeSelectProcessor.OnCommited += (mode) => ModeSelectProcessor.Deative();
+            SelectProcessor.OnCommited += (mode) => PlayProcessor.Ative(mode);
+            SelectProcessor.OnCommited += (mode) => SelectProcessor.Deative();
+
             PlayProcessor.OnRestart += (() => PlayProcessor.Deative());
-            PlayProcessor.OnRestart += (() => ModeSelectProcessor.Ative());
+            PlayProcessor.OnRestart += (() => SelectProcessor.Ative());
+
+            SelectProcessor.Ative();
         }
     }
 }

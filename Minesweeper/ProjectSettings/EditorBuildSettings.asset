@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Minesweeper.unity
-    guid: 01f319fc754383b4489b01ac474e5f3f
-  - enabled: 1
-    path: Assets/Scenes/Home.unity
-    guid: ecef55c12d6e6f246a3eba748518a335
+    path: Assets/Scenes/Classic Minesweeper.unity
+    guid: bb5a58b17b771c94698dd5df021593a1
   m_configObjects: {}

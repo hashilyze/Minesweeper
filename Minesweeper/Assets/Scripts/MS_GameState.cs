@@ -8,16 +8,17 @@ namespace Minesweeper {
         public MS_GameState(in Vector2Int size) {
             IsFirst = true;
             IsFlags = new bool[size.x, size.y];
-            StartTime = Time.time;
+
+            ElapsedTime = 0;
             UsedFlagNum = 0;
             OpenTileNum = 0;
         }
 
         public bool IsFirst;
         public bool[,] IsFlags;
-        public float StartTime;
 
         public int UsedFlagNum;
         public int OpenTileNum;
+        public float ElapsedTime;
     }
 }

@@ -8,5 +8,6 @@ namespace Minesweeper {
         public TMPro.TextMeshProUGUI Header;
         public TMPro.TextMeshProUGUI TimeBoard;
         public Button Off;
+        public Button Restart;
     }
 }
